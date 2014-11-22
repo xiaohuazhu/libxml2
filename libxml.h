@@ -20,7 +20,7 @@
 
 #if defined(macintosh)
 #include "config-mac.h"
-#elif defined(_WIN32_WCE)
+#elif defined(_WIN32_WCE) || defined(_MSC_VER)
 /*
  * Windows CE compatibility definitions and functions
  * This is needed to compile libxml2 for Windows CE.
