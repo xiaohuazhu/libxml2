@@ -119,3 +119,7 @@ xstc/Makefile
 xstc/Makefile.in
 xstc/Tests
 xstc/xsts-*.tar.gz
+Thumbs.db
+win32/VC10/*.sdf
+win32/VC10/*.suo
+win32/VC10/*.vcxproj.user
