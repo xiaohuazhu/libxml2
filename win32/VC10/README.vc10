@@ -9,10 +9,29 @@ Quick Start
 -----------
 
 1) To use, load the libxml2.sln solution file into visual studio
-2) check and correct paths for dependent "iconv" project which most certaily 
-are wrong on your environment.
-3) Compile all projects
+2) Download the builds of icu4c for win32 and win64 from one of those locations:
 
+- http://download.icu-project.org/files/icu4c/54.1/icu4c-54_1-Win32-msvc10.zip
+- http://download.icu-project.org/files/icu4c/54.1/icu4c-54_1-Win64-msvc10.zip
+
+or
+
+- http://d.etpan.org/mailcore2-deps/misc-win32/icu4c-54_1-Win32-msvc10.zip
+- http://d.etpan.org/mailcore2-deps/misc-win32/icu4c-54_1-Win64-msvc10.zip
+
+You could also download a more recent version.
+
+#### icu4c win32 ####
+
+- copy `bin`, `include` and `lib` folders to `libxml2/third-party`.
+
+#### icu4c win64 ####
+
+- copy `bin64`, `include` and `lib64` folders to `libxml2/third-party`.
+
+Keep in mind that the provided binaries are built in release mode.
+
+3) Build.
 
 Background Info
 ---------------
