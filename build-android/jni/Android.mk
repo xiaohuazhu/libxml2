@@ -12,8 +12,8 @@ src_files := SAX.c entities.c encoding.c error.c \
 
 include $(CLEAR_VARS)
 
-ifeq ($(ICU_SOURCE_PATH),)
-$(error ICU_SOURCE_PATH must be set)
+ifeq ($(ICU4C_PATH),)
+$(error ICU4C_PATH must be set)
 endif
 
 NDK_TOOLCHAIN_VERSION := clang
@@ -21,7 +21,7 @@ LOCAL_MODULE := libxml2
 LOCAL_CFLAGS += -DLIBXML_THREAD_ENABLED=1
 src_dir := $(LOCAL_PATH)/../..
 LOCAL_SRC_FILES := $(addprefix $(src_dir)/, $(src_files))
-LOCAL_C_INCLUDES += $(src_dir)/build-android/include $(src_dir)/include $(ICU_SOURCE_PATH)/source/common
-LOCAL_SHARED_LIBRARIES := icu4c
+LOCAL_C_INCLUDES += $(src_dir)/build-android/include $(src_dir)/include \
+  $(ICU4C_PATH)/include
 
 include $(BUILD_STATIC_LIBRARY)
