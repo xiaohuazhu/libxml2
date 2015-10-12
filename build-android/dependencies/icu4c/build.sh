@@ -37,6 +37,9 @@ function build {
     exit 1
   fi
   
+  cd "$current_dir/src/icu"
+  patch -p1 < "$current_dir/icu-android-16.patch"
+  
   if test ! -d "$current_dir/$package_name-$build_version/include/unicode" ; then
     mkdir -p "$current_dir/$package_name-$build_version"
     mkdir -p "$current_dir/$package_name-$build_version/include"

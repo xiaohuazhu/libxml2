@@ -2,7 +2,7 @@
 
 build_version=2
 ANDROID_PLATFORM=android-16
-icu4c_build_version=1
+icu4c_build_version=2
 archs="armeabi armeabi-v7a x86"
 package_name=libxml2-android
 

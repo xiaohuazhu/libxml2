@@ -1,0 +1,25 @@
+diff -Naur icu-a/source/common/unicode/std_string.h icu-b/source/common/unicode/std_string.h
+--- icu-a/source/common/unicode/std_string.h	2014-10-03 09:11:02.000000000 -0700
++++ icu-b/source/common/unicode/std_string.h	2015-10-12 13:06:13.000000000 -0700
+@@ -30,6 +30,21 @@
+ #if !defined(_MSC_VER)
+ namespace std { class type_info; } // WORKAROUND: http://llvm.org/bugs/show_bug.cgi?id=13364
+ #endif
++
++#ifdef __ANDROID_API__
++#if __ANDROID_API__ < 21
++#include <wchar.h>
++extern int               iswblank(wint_t);
++extern int vfwscanf(FILE*, const wchar_t*, va_list);
++extern int vswscanf(const wchar_t*, const wchar_t*, va_list);
++extern int vwscanf(const wchar_t*, va_list);
++extern float wcstof(const wchar_t*, wchar_t**);
++extern long double wcstold(const wchar_t*, wchar_t**);
++extern long long wcstoll(const wchar_t*, wchar_t**, int);
++extern unsigned long long wcstoull(const wchar_t*, wchar_t**, int);
++#endif
++#endif
++
+ #include <string>
+ 
+ #endif  // U_HAVE_STD_STRING
