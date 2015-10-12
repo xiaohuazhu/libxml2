@@ -1,9 +1,9 @@
 #!/bin/sh
 
-build_version=1
-ANDROID_PLATFORM=android-21
+build_version=2
+ANDROID_PLATFORM=android-16
 icu4c_build_version=1
-archs="armeabi armeabi-v7a x86 x86_64"
+archs="armeabi armeabi-v7a x86"
 package_name=libxml2-android
 
 current_dir="`pwd`"
