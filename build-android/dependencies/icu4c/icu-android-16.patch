@@ -1,7 +1,7 @@
 diff -Naur icu-a/source/common/unicode/std_string.h icu-b/source/common/unicode/std_string.h
 --- icu-a/source/common/unicode/std_string.h	2014-10-03 09:11:02.000000000 -0700
-+++ icu-b/source/common/unicode/std_string.h	2015-10-12 13:06:13.000000000 -0700
-@@ -30,6 +30,21 @@
++++ icu-b/source/common/unicode/std_string.h	2016-11-20 09:46:41.000000000 -0800
+@@ -30,6 +30,23 @@
  #if !defined(_MSC_VER)
  namespace std { class type_info; } // WORKAROUND: http://llvm.org/bugs/show_bug.cgi?id=13364
  #endif
@@ -17,9 +17,24 @@ diff -Naur icu-a/source/common/unicode/std_string.h icu-b/source/common/unicode/
 +extern long double wcstold(const wchar_t*, wchar_t**);
 +extern long long wcstoll(const wchar_t*, wchar_t**, int);
 +extern unsigned long long wcstoull(const wchar_t*, wchar_t**, int);
++extern long double strtold(const char*, char**);
++extern void _Exit(int);
 +#endif
 +#endif
 +
  #include <string>
  
  #endif  // U_HAVE_STD_STRING
+diff -Naur icu-a/source/common/utypeinfo.h icu-b/source/common/utypeinfo.h
+--- icu-a/source/common/utypeinfo.h	2014-10-03 09:11:12.000000000 -0700
++++ icu-b/source/common/utypeinfo.h	2016-11-20 09:47:45.000000000 -0800
+@@ -10,6 +10,9 @@
+ #ifndef __UTYPEINFO_H__
+ #define __UTYPEINFO_H__
+ 
++extern long double strtold(const char*, char**);
++extern void _Exit(int);
++
+ // Windows header <typeinfo> does not define 'exception' in 'std' namespace.
+ // Therefore, a project using ICU cannot be compiled with _HAS_EXCEPTION
+ // set to 0 on Windows with Visual Studio. To work around that, we have to

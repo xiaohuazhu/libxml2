@@ -1,9 +1,6 @@
 #!/bin/sh
 
-build_version=2
-ANDROID_PLATFORM=android-16
-openssl_build_version=1
-archs="armeabi armeabi-v7a x86"
+build_version=3
 package_name=icu4c-android
 version=54.1
 
@@ -38,7 +35,7 @@ function build {
   fi
   
   cd "$current_dir/src/icu"
-  patch -p1 < "$current_dir/icu-android-16.patch"
+  # patch -p1 < "$current_dir/icu-android-16.patch"
   
   if test ! -d "$current_dir/$package_name-$build_version/include/unicode" ; then
     mkdir -p "$current_dir/$package_name-$build_version"
@@ -50,6 +47,7 @@ function build {
 
   cp -R "$current_dir/build-android" "$current_dir/src/icu"
   cd "$current_dir/src/icu/build-android/jni"
+  echo Building $ANDROID_PLATFORM - $TARGET_ARCH_ABI
   $ANDROID_NDK/ndk-build TARGET_PLATFORM=$ANDROID_PLATFORM TARGET_ARCH_ABI=$TARGET_ARCH_ABI
 
   mkdir -p "$current_dir/$package_name-$build_version/libs/$TARGET_ARCH_ABI"
@@ -58,6 +56,14 @@ function build {
 }
 
 # Start building.
+ANDROID_PLATFORM=android-16
+archs="armeabi armeabi-v7a x86"
+for arch in $archs ; do
+  TARGET_ARCH_ABI=$arch
+  build
+done
+ANDROID_PLATFORM=android-21
+archs="arm64-v8a"
 for arch in $archs ; do
   TARGET_ARCH_ABI=$arch
   build

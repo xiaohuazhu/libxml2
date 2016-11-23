@@ -197,11 +197,14 @@ NDK_TOOLCHAIN_VERSION := clang
 LOCAL_CFLAGS := -DU_COMMON_IMPLEMENTATION -DU_I18N_IMPLEMENTATION -DU_COMBINED_IMPLEMENTATION
 LOCAL_CPPFLAGS := -frtti
 LOCAL_C_INCLUDES := $(src_dir)/i18n $(src_dir)/common \
-  $(ANDROID_NDK)/sources/cxx-stl/llvm-libc++/libcxx/include
+  $(ANDROID_NDK)/sources/cxx-stl/gnu-libstdc++/4.9/include \
+  $(ANDROID_NDK)/sources/cxx-stl/gnu-libstdc++/4.9/libs/$(TARGET_ARCH_ABI)/include
+  # $(ANDROID_NDK)/sources/cxx-stl/llvm-libc++/include \
+  # $(ANDROID_NDK)/sources/cxx-stl/llvm-libc++/libcxx/include
 #  $(ANDROID_NDK)/arch-arm/usr/include
 LOCAL_MODULE := icu4c
 LOCAL_SRC_FILES := $(common_src_files) $(i18n_src_files)
-LOCAL_LDLIBS += -L$(ANDROID_NDK)/sources/cxx-stl/llvm-libc++/libs/$(TARGET_ARCH_ABI)
+# LOCAL_LDLIBS += -L$(ANDROID_NDK)/sources/cxx-stl/llvm-libc++/libs/$(TARGET_ARCH_ABI)
 #LOCAL_SHARED_LIBRARIES = c c++_shared
 
 #include $(BUILD_SHARED_LIBRARY)
