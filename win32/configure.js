@@ -14,7 +14,7 @@ var srcDirUtils = "..";
 var baseName = "libxml2";
 /* Configure file which contains the version and the output file where
    we can store our build configuration. */
-var configFile = srcDirXml + "\\configure.in";
+var configFile = srcDirXml + "\\configure.ac";
 var versionFile = ".\\config.msvc";
 /* Input and output files regarding the libxml features. */
 var optsFileIn = srcDirXml + "\\include\\libxml\\xmlversion.h.in";
@@ -280,6 +280,18 @@ function discoverVersion()
 		vf.WriteLine("DYNRUNTIME=" + (dynruntime? "1" : "0"));
 	}
 	vf.Close();
+	versionFile = "rcVersion.h"
+	vf = fso.CreateTextFile(versionFile, true);
+	vf.WriteLine("/*");
+	vf.WriteLine("  " + versionFile);
+	vf.WriteLine("  This file is generated automatically by " + WScript.ScriptName + ".");
+	vf.WriteLine("*/");
+	vf.WriteBlankLines(1);
+	vf.WriteLine("#define LIBXML_MAJOR_VERSION " + verMajor);
+	vf.WriteLine("#define LIBXML_MINOR_VERSION " + verMinor);
+	vf.WriteLine("#define LIBXML_MICRO_VERSION " + verMicro);
+	vf.WriteLine("#define LIBXML_DOTTED_VERSION " + "\"" + verMajor + "." + verMinor + "." + verMicro + "\"");
+	vf.Close()
 }
 
 /* Configures libxml. This one will generate xmlversion.h from xmlversion.h.in
