@@ -2,206 +2,96 @@ LOCAL_PATH := $(call my-dir)
 include $(CLEAR_VARS)
 
 common_src_files = \
-appendable.cpp                 ucnv_ext.cpp \
-bmpset.cpp                     ucnv_io.cpp \
-brkeng.cpp                     ucnv_lmb.c \
-brkiter.cpp                    ucnv_set.c \
-bytestream.cpp                 ucnv_u16.c \
-bytestrie.cpp                  ucnv_u32.c \
-bytestriebuilder.cpp           ucnv_u7.c \
-bytestrieiterator.cpp          ucnv_u8.c \
-caniter.cpp                    ucnvbocu.cpp \
-chariter.cpp                   ucnvdisp.c \
-charstr.cpp                    ucnvhz.c \
-cmemory.c                      ucnvisci.c \
-cstring.c                      ucnvlat1.c \
-cwchar.c                       ucnvmbcs.cpp \
-dictbe.cpp                     ucnvscsu.c \
-dictionarydata.cpp             ucnvsel.cpp \
-dtintrv.cpp                    ucol_swp.cpp \
-errorcode.cpp                  udata.cpp \
-filterednormalizer2.cpp        udatamem.c \
-icudataver.c                   udataswp.c \
-icuplug.cpp                    uenum.c \
-listformatter.cpp              uhash.c \
-loadednormalizer2impl.cpp      uhash_us.cpp \
-locavailable.cpp               uidna.cpp \
-locbased.cpp                   uinit.cpp \
-locdispnames.cpp               uinvchar.c \
-locid.cpp                      uiter.cpp \
-loclikely.cpp                  ulist.c \
-locmap.c                       uloc.cpp \
-locresdata.cpp                 uloc_keytype.cpp \
-locutil.cpp                    uloc_tag.c \
-messagepattern.cpp             umapfile.c \
-normalizer2.cpp                umath.c \
-normalizer2impl.cpp            umutex.cpp \
-normlzr.cpp                    unames.cpp \
-parsepos.cpp                   unifiedcache.cpp \
-patternprops.cpp               unifilt.cpp \
-propname.cpp                   unifunct.cpp \
-propsvec.c                     uniset.cpp \
-punycode.cpp                   uniset_closure.cpp \
-putil.cpp                      uniset_props.cpp \
-rbbi.cpp                       unisetspan.cpp \
-rbbidata.cpp                   unistr.cpp \
-rbbinode.cpp                   unistr_case.cpp \
-rbbirb.cpp                     unistr_case_locale.cpp \
-rbbiscan.cpp                   unistr_cnv.cpp \
-rbbisetb.cpp                   unistr_props.cpp \
-rbbistbl.cpp                   unistr_titlecase_brkiter.cpp \
-rbbitblb.cpp                   unorm.cpp \
-resbund.cpp                    unormcmp.cpp \
-resbund_cnv.cpp                uobject.cpp \
-ruleiter.cpp                   uprops.cpp \
-schriter.cpp                   ures_cnv.c \
-serv.cpp                       uresbund.cpp \
-servlk.cpp                     uresdata.c \
-servlkf.cpp                    usc_impl.c \
-servls.cpp                     uscript.c \
-servnotf.cpp                   uscript_props.cpp \
-servrbf.cpp                    uset.cpp \
-servslkf.cpp                   uset_props.cpp \
-sharedobject.cpp               usetiter.cpp \
-simplepatternformatter.cpp     ushape.cpp \
-stringpiece.cpp                usprep.cpp \
-stringtriebuilder.cpp          ustack.cpp \
-uarrsort.c                     ustr_cnv.cpp \
-ubidi.c                        ustr_titlecase_brkiter.cpp \
-ubidi_props.c                  ustr_wcs.cpp \
-ubidiln.c                      ustrcase.cpp \
-ubidiwrt.c                     ustrcase_locale.cpp \
-ubrk.cpp                       ustrenum.cpp \
-ucase.cpp                      ustrfmt.c \
-ucasemap.cpp                   ustring.cpp \
-ucasemap_titlecase_brkiter.cpp ustrtrns.cpp \
-ucat.c                         utext.cpp \
-uchar.c                        utf_impl.c \
-ucharstrie.cpp                 util.cpp \
-ucharstriebuilder.cpp          util_props.cpp \
-ucharstrieiterator.cpp         utrace.c \
-uchriter.cpp                   utrie.cpp \
-ucln_cmn.cpp                   utrie2.cpp \
-ucmndata.c                     utrie2_builder.cpp \
-ucnv.c                         uts46.cpp \
-ucnv2022.cpp                   utypes.c \
-ucnv_bld.cpp                   uvector.cpp \
-ucnv_cb.c                      uvectr32.cpp \
-ucnv_cnv.c                     uvectr64.cpp \
-ucnv_ct.c                      wintz.c \
-ucnv_err.c
+appendable.cpp			loclikely.cpp			servls.cpp			ucnv_ct.cpp			uloc.cpp			usetiter.cpp \
+bmpset.cpp			locmap.cpp			servnotf.cpp			ucnv_err.cpp			uloc_keytype.cpp		ushape.cpp \
+brkeng.cpp			locresdata.cpp			servrbf.cpp			ucnv_ext.cpp			uloc_tag.cpp			usprep.cpp \
+brkiter.cpp			locutil.cpp			servslkf.cpp			ucnv_io.cpp			umapfile.cpp			ustack.cpp \
+bytesinkutil.cpp		messagepattern.cpp		sharedobject.cpp		ucnv_lmb.cpp			umath.cpp			ustr_cnv.cpp \
+bytestream.cpp			normalizer2.cpp			simpleformatter.cpp		ucnv_set.cpp			umutex.cpp			ustr_titlecase_brkiter.cpp \
+bytestrie.cpp			normalizer2impl.cpp		static_unicode_sets.cpp		ucnv_u16.cpp			unames.cpp			ustr_wcs.cpp \
+bytestriebuilder.cpp		normlzr.cpp			stringpiece.cpp			ucnv_u32.cpp			unifiedcache.cpp		ustrcase.cpp \
+bytestrieiterator.cpp		parsepos.cpp			stringtriebuilder.cpp		ucnv_u7.cpp			unifilt.cpp			ustrcase_locale.cpp \
+caniter.cpp			patternprops.cpp		uarrsort.cpp			ucnv_u8.cpp			unifunct.cpp			ustrenum.cpp \
+chariter.cpp			pluralmap.cpp			ubidi.cpp			ucnvbocu.cpp			uniset.cpp			ustrfmt.cpp \
+charstr.cpp			propname.cpp			ubidi_props.cpp			ucnvdisp.cpp			uniset_closure.cpp		ustring.cpp \
+cmemory.cpp			propsvec.cpp			ubidiln.cpp			ucnvhz.cpp			uniset_props.cpp		ustrtrns.cpp \
+cstr.cpp			punycode.cpp			ubiditransform.cpp		ucnvisci.cpp			unisetspan.cpp			utext.cpp \
+cstring.cpp			putil.cpp			ubidiwrt.cpp			ucnvlat1.cpp			unistr.cpp			utf_impl.cpp \
+cwchar.cpp			rbbi.cpp			ubrk.cpp			ucnvmbcs.cpp			unistr_case.cpp			util.cpp \
+dictbe.cpp			rbbi_cache.cpp			ucase.cpp			ucnvscsu.cpp			unistr_case_locale.cpp		util_props.cpp \
+dictionarydata.cpp		rbbidata.cpp			ucasemap.cpp			ucnvsel.cpp			unistr_cnv.cpp			utrace.cpp \
+dtintrv.cpp			rbbinode.cpp			ucasemap_titlecase_brkiter.cpp	ucol_swp.cpp			unistr_props.cpp		utrie.cpp \
+edits.cpp			rbbirb.cpp			ucat.cpp			ucurr.cpp			unistr_titlecase_brkiter.cpp	utrie2.cpp \
+errorcode.cpp			rbbiscan.cpp			uchar.cpp			udata.cpp			unorm.cpp			utrie2_builder.cpp \
+filteredbrk.cpp			rbbisetb.cpp			ucharstrie.cpp			udatamem.cpp			unormcmp.cpp			uts46.cpp \
+filterednormalizer2.cpp		rbbistbl.cpp			ucharstriebuilder.cpp		udataswp.cpp			uobject.cpp			utypes.cpp \
+icudataver.cpp			rbbitblb.cpp			ucharstrieiterator.cpp		uenum.cpp			uprops.cpp			uvector.cpp \
+icuplug.cpp			resbund.cpp			uchriter.cpp			uhash.cpp			ures_cnv.cpp			uvectr32.cpp \
+listformatter.cpp		resbund_cnv.cpp			ucln_cmn.cpp			uhash_us.cpp			uresbund.cpp			uvectr64.cpp \
+loadednormalizer2impl.cpp	resource.cpp			ucmndata.cpp			uidna.cpp			uresdata.cpp			wintz.cpp \
+locavailable.cpp		ruleiter.cpp			ucnv.cpp			uinit.cpp			usc_impl.cpp \
+locbased.cpp			schriter.cpp			ucnv2022.cpp			uinvchar.cpp			uscript.cpp \
+locdispnames.cpp		serv.cpp			ucnv_bld.cpp			uiter.cpp			uscript_props.cpp \
+locdspnm.cpp			servlk.cpp			ucnv_cb.cpp			ulist.cpp			uset.cpp \
+locid.cpp			servlkf.cpp			ucnv_cnv.cpp			ulistformatter.cpp		uset_props.cpp
 
-common_src_files += ../stubdata/stubdata.c
+common_src_files += ../stubdata/stubdata.cpp
 
 i18n_src_files = \
-alphaindex.cpp                olsontz.cpp \
-anytrans.cpp                  persncal.cpp \
-astro.cpp                     plurfmt.cpp \
-basictz.cpp                   plurrule.cpp \
-bocsu.cpp                     quant.cpp \
-brktrans.cpp                  quantityformatter.cpp \
-buddhcal.cpp                  rbnf.cpp \
-calendar.cpp                  rbt.cpp \
-casetrn.cpp                   rbt_data.cpp \
-cecal.cpp                     rbt_pars.cpp \
-chnsecal.cpp                  rbt_rule.cpp \
-choicfmt.cpp                  rbt_set.cpp \
-coleitr.cpp                   rbtz.cpp \
-coll.cpp                      regexcmp.cpp \
-collation.cpp                 regeximp.cpp \
-collationbasedatabuilder.cpp  regexst.cpp \
-collationbuilder.cpp          regextxt.cpp \
-collationcompare.cpp          region.cpp \
-collationdata.cpp             reldatefmt.cpp \
-collationdatabuilder.cpp      reldtfmt.cpp \
-collationdatareader.cpp       rematch.cpp \
-collationdatawriter.cpp       remtrans.cpp \
-collationfastlatin.cpp        repattrn.cpp \
-collationfastlatinbuilder.cpp rulebasedcollator.cpp \
-collationfcd.cpp              scientificformathelper.cpp \
-collationiterator.cpp         scriptset.cpp \
-collationkeys.cpp             search.cpp \
-collationroot.cpp             selfmt.cpp \
-collationrootelements.cpp     sharedbreakiterator.cpp \
-collationruleparser.cpp       simpletz.cpp \
-collationsets.cpp             smpdtfmt.cpp \
-collationsettings.cpp         smpdtfst.cpp \
-collationtailoring.cpp        sortkey.cpp \
-collationweights.cpp          strmatch.cpp \
-compactdecimalformat.cpp      strrepl.cpp \
-coptccal.cpp                  stsearch.cpp \
-cpdtrans.cpp                  taiwncal.cpp \
-csdetect.cpp                  timezone.cpp \
-csmatch.cpp                   titletrn.cpp \
-csr2022.cpp                   tmunit.cpp \
-csrecog.cpp                   tmutamt.cpp \
-csrmbcs.cpp                   tmutfmt.cpp \
-csrsbcs.cpp                   tolowtrn.cpp \
-csrucode.cpp                  toupptrn.cpp \
-csrutf8.cpp                   translit.cpp \
-curramt.cpp                   transreg.cpp \
-currfmt.cpp                   tridpars.cpp \
-currpinf.cpp                  tzfmt.cpp \
-currunit.cpp                  tzgnames.cpp \
-dangical.cpp                  tznames.cpp \
-datefmt.cpp                   tznames_impl.cpp \
-dcfmtsym.cpp                  tzrule.cpp \
-decContext.c                  tztrans.cpp \
-decNumber.c                   ucal.cpp \
-decfmtst.cpp                  ucln_in.cpp \
-decimalformatpattern.cpp      ucol.cpp \
-decimfmt.cpp                  ucol_res.cpp \
-digitlst.cpp                  ucol_sit.cpp \
-dtfmtsym.cpp                  ucoleitr.cpp \
-dtitvfmt.cpp                  ucsdet.cpp \
-dtitvinf.cpp                  ucurr.cpp \
-dtptngen.cpp                  udat.cpp \
-dtrule.cpp                    udateintervalformat.cpp \
-esctrn.cpp                    udatpg.cpp \
-ethpccal.cpp                  uitercollationiterator.cpp \
-filteredbrk.cpp               ulocdata.c \
-fmtable.cpp                   umsg.cpp \
-fmtable_cnv.cpp               unesctrn.cpp \
-format.cpp                    uni2name.cpp \
-fphdlimp.cpp                  unum.cpp \
-fpositer.cpp                  unumsys.cpp \
-funcrepl.cpp                  upluralrules.cpp \
-gender.cpp                    uregex.cpp \
-gregocal.cpp                  uregexc.cpp \
-gregoimp.cpp                  uregion.cpp \
-hebrwcal.cpp                  usearch.cpp \
-identifier_info.cpp           uspoof.cpp \
-indiancal.cpp                 uspoof_build.cpp \
-inputext.cpp                  uspoof_conf.cpp \
-islamcal.cpp                  uspoof_impl.cpp \
-japancal.cpp                  uspoof_wsconf.cpp \
-locdspnm.cpp                  utf16collationiterator.cpp \
-measfmt.cpp                   utf8collationiterator.cpp \
-measunit.cpp                  utmscale.c \
-measure.cpp                   utrans.cpp \
-msgfmt.cpp                    vtzone.cpp \
-name2uni.cpp                  vzone.cpp \
-nfrs.cpp                      windtfmt.cpp \
-nfrule.cpp                    winnmfmt.cpp \
-nfsubs.cpp                    wintzimpl.cpp \
-nortrans.cpp                  zonemeta.cpp \
-nultrans.cpp                  zrule.cpp \
-numfmt.cpp                    ztrans.cpp \
-numsys.cpp
+alphaindex.cpp				currfmt.cpp				nfsubs.cpp				quantityformatter.cpp			tznames.cpp \
+anytrans.cpp				currpinf.cpp				nortrans.cpp				rbnf.cpp				tznames_impl.cpp \
+astro.cpp				currunit.cpp				nounit.cpp				rbt.cpp					tzrule.cpp \
+basictz.cpp				dangical.cpp				nultrans.cpp				rbt_data.cpp				tztrans.cpp \
+bocsu.cpp				datefmt.cpp				number_affixutils.cpp			rbt_pars.cpp				ucal.cpp \
+brktrans.cpp				dayperiodrules.cpp			number_asformat.cpp			rbt_rule.cpp				ucln_in.cpp \
+buddhcal.cpp				dcfmtsym.cpp				number_capi.cpp				rbt_set.cpp				ucol.cpp \
+calendar.cpp				decContext.cpp				number_compact.cpp			rbtz.cpp				ucol_res.cpp \
+casetrn.cpp				decNumber.cpp				number_currencysymbols.cpp		regexcmp.cpp				ucol_sit.cpp \
+cecal.cpp				decimfmt.cpp				number_decimalquantity.cpp		regeximp.cpp				ucoleitr.cpp \
+chnsecal.cpp				double-conversion-bignum-dtoa.cpp	number_decimfmtprops.cpp		regexst.cpp				ucsdet.cpp \
+choicfmt.cpp				double-conversion-bignum.cpp		number_fluent.cpp			regextxt.cpp				udat.cpp \
+coleitr.cpp				double-conversion-cached-powers.cpp	number_formatimpl.cpp			region.cpp				udateintervalformat.cpp \
+coll.cpp				double-conversion-diy-fp.cpp		number_grouping.cpp			reldatefmt.cpp				udatpg.cpp \
+collation.cpp				double-conversion-fast-dtoa.cpp		number_integerwidth.cpp			reldtfmt.cpp				ufieldpositer.cpp \
+collationbuilder.cpp			double-conversion-strtod.cpp		number_longnames.cpp			rematch.cpp				uitercollationiterator.cpp \
+collationcompare.cpp			double-conversion.cpp			number_mapper.cpp			remtrans.cpp				ulocdata.cpp \
+collationdata.cpp			dtfmtsym.cpp				number_modifiers.cpp			repattrn.cpp				umsg.cpp \
+collationdatabuilder.cpp		dtitvfmt.cpp				number_multiplier.cpp			rulebasedcollator.cpp			unesctrn.cpp \
+collationdatareader.cpp			dtitvinf.cpp				number_notation.cpp			scientificnumberformatter.cpp		uni2name.cpp \
+collationdatawriter.cpp			dtptngen.cpp				number_padding.cpp			scriptset.cpp				unum.cpp \
+collationfastlatin.cpp			dtrule.cpp				number_patternmodifier.cpp		search.cpp				unumsys.cpp \
+collationfastlatinbuilder.cpp		esctrn.cpp				number_patternstring.cpp		selfmt.cpp				upluralrules.cpp \
+collationfcd.cpp			ethpccal.cpp				number_rounding.cpp			sharedbreakiterator.cpp			uregex.cpp \
+collationiterator.cpp			fmtable.cpp				number_scientific.cpp			simpletz.cpp				uregexc.cpp \
+collationkeys.cpp			fmtable_cnv.cpp				number_skeletons.cpp			smpdtfmt.cpp				uregion.cpp \
+collationroot.cpp			format.cpp				number_stringbuilder.cpp		smpdtfst.cpp				usearch.cpp \
+collationrootelements.cpp		fphdlimp.cpp				number_utils.cpp			sortkey.cpp				uspoof.cpp \
+collationruleparser.cpp			fpositer.cpp				numfmt.cpp				standardplural.cpp			uspoof_build.cpp \
+collationsets.cpp			funcrepl.cpp				numparse_affixes.cpp			strmatch.cpp				uspoof_conf.cpp \
+collationsettings.cpp			gender.cpp				numparse_compositions.cpp		strrepl.cpp				uspoof_impl.cpp \
+collationtailoring.cpp			gregocal.cpp				numparse_currency.cpp			stsearch.cpp				utf16collationiterator.cpp \
+collationweights.cpp			gregoimp.cpp				numparse_decimal.cpp			taiwncal.cpp				utf8collationiterator.cpp \
+compactdecimalformat.cpp		hebrwcal.cpp				numparse_impl.cpp			timezone.cpp				utmscale.cpp \
+coptccal.cpp				indiancal.cpp				numparse_parsednumber.cpp		titletrn.cpp				utrans.cpp \
+cpdtrans.cpp				inputext.cpp				numparse_scientific.cpp			tmunit.cpp				vtzone.cpp \
+csdetect.cpp				islamcal.cpp				numparse_stringsegment.cpp		tmutamt.cpp				vzone.cpp \
+csmatch.cpp				japancal.cpp				numparse_symbols.cpp			tmutfmt.cpp				windtfmt.cpp \
+csr2022.cpp				measfmt.cpp				numparse_validators.cpp			tolowtrn.cpp				winnmfmt.cpp \
+csrecog.cpp				measunit.cpp				numsys.cpp				toupptrn.cpp				wintzimpl.cpp \
+csrmbcs.cpp				measure.cpp				olsontz.cpp				translit.cpp				zonemeta.cpp \
+csrsbcs.cpp				msgfmt.cpp				persncal.cpp				transreg.cpp				zrule.cpp \
+csrucode.cpp				name2uni.cpp				plurfmt.cpp				tridpars.cpp				ztrans.cpp \
+csrutf8.cpp				nfrs.cpp				plurrule.cpp				tzfmt.cpp \
+curramt.cpp				nfrule.cpp				quant.cpp				tzgnames.cpp
 
 src_dir := $(LOCAL_PATH)/../../source
 common_src_files := $(addprefix $(src_dir)/common/, $(common_src_files))
 i18n_src_files := $(addprefix $(src_dir)/i18n/, $(i18n_src_files))
 
 NDK_TOOLCHAIN_VERSION := clang
-LOCAL_CFLAGS := -DU_COMMON_IMPLEMENTATION -DU_I18N_IMPLEMENTATION -DU_COMBINED_IMPLEMENTATION
-LOCAL_CPPFLAGS := -frtti
-LOCAL_C_INCLUDES := $(src_dir)/i18n $(src_dir)/common \
-  $(ANDROID_NDK)/sources/cxx-stl/gnu-libstdc++/4.9/include \
-  $(ANDROID_NDK)/sources/cxx-stl/gnu-libstdc++/4.9/libs/$(TARGET_ARCH_ABI)/include
-  # $(ANDROID_NDK)/sources/cxx-stl/llvm-libc++/include \
-  # $(ANDROID_NDK)/sources/cxx-stl/llvm-libc++/libcxx/include
-#  $(ANDROID_NDK)/arch-arm/usr/include
+LOCAL_CFLAGS := -DU_COMMON_IMPLEMENTATION -DU_I18N_IMPLEMENTATION -DU_COMBINED_IMPLEMENTATION -fPIC -O3 -Wall
+LOCAL_CPPFLAGS := -frtti -std=c++1z
+LOCAL_C_INCLUDES := $(src_dir)/i18n $(src_dir)/common
 LOCAL_MODULE := icu4c
 LOCAL_SRC_FILES := $(common_src_files) $(i18n_src_files)
 # LOCAL_LDLIBS += -L$(ANDROID_NDK)/sources/cxx-stl/llvm-libc++/libs/$(TARGET_ARCH_ABI)

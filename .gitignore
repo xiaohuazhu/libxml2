@@ -129,3 +129,4 @@ Thumbs.db
 win32/VC10/*.sdf
 win32/VC10/*.suo
 win32/VC10/*.vcxproj.user
+.DS_Store

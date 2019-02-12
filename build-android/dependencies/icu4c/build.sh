@@ -1,8 +1,8 @@
 #!/bin/sh
 
-build_version=3
+build_version=4
 package_name=icu4c-android
-version=54.1
+version=62.1
 
 underscore_version="`echo $version|sed -e 's/\./_/'`"
 archive_name=icu4c-$underscore_version-src.tgz
@@ -47,27 +47,20 @@ function build {
 
   cp -R "$current_dir/build-android" "$current_dir/src/icu"
   cd "$current_dir/src/icu/build-android/jni"
-  echo Building $ANDROID_PLATFORM - $TARGET_ARCH_ABI
-  $ANDROID_NDK/ndk-build TARGET_PLATFORM=$ANDROID_PLATFORM TARGET_ARCH_ABI=$TARGET_ARCH_ABI
+  echo Building
+  $ANDROID_NDK/ndk-build
 
-  mkdir -p "$current_dir/$package_name-$build_version/libs/$TARGET_ARCH_ABI"
-  cp "$current_dir/src/icu/build-android/obj/local/$TARGET_ARCH_ABI"/libicu4c.a "$current_dir/$package_name-$build_version/libs/$TARGET_ARCH_ABI"
+  archs="x86_64 armeabi-v7a x86 arm64-v8a"
+  for arch in $archs ; do
+    TARGET_ARCH_ABI=$arch
+    mkdir -p "$current_dir/$package_name-$build_version/libs/$TARGET_ARCH_ABI"
+    cp "$current_dir/src/icu/build-android/obj/local/$TARGET_ARCH_ABI"/libicu4c.a "$current_dir/$package_name-$build_version/libs/$TARGET_ARCH_ABI"
+  done
   rm -rf "$current_dir/src"
 }
 
 # Start building.
-ANDROID_PLATFORM=android-16
-archs="armeabi armeabi-v7a x86"
-for arch in $archs ; do
-  TARGET_ARCH_ABI=$arch
-  build
-done
-ANDROID_PLATFORM=android-21
-archs="arm64-v8a"
-for arch in $archs ; do
-  TARGET_ARCH_ABI=$arch
-  build
-done
+build
 
 cd "$current_dir"
 zip -qry "$package_name-$build_version.zip" "$package_name-$build_version"

@@ -1,7 +1,7 @@
 #!/bin/sh
 
-build_version=3
-icu4c_build_version=3
+build_version=4
+icu4c_build_version=4
 package_name=libxml2-android
 
 current_dir="`pwd`"
@@ -39,14 +39,8 @@ cp -r "$current_dir/../include/libxml" "$current_dir/$package_name-$build_versio
 cp "$current_dir/include/libxml/xmlversion.h" "$current_dir/$package_name-$build_version/include/libxml"
 
 # Start building.
-ANDROID_PLATFORM=android-16
-archs="armeabi armeabi-v7a x86"
-for arch in $archs ; do
-  TARGET_ARCH_ABI=$arch
-  build
-done
 ANDROID_PLATFORM=android-21
-archs="arm64-v8a"
+archs="x86_64 armeabi-v7a x86 arm64-v8a"
 for arch in $archs ; do
   TARGET_ARCH_ABI=$arch
   build
