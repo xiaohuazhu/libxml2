@@ -21,11 +21,16 @@ function build {
   rm -rf "$current_dir/obj"
   
   cd "$current_dir/jni"
-  $ANDROID_NDK/ndk-build TARGET_PLATFORM=$ANDROID_PLATFORM TARGET_ARCH_ABI=$TARGET_ARCH_ABI \
+  echo Building
+  $ANDROID_NDK/ndk-build \
     ICU4C_PATH="$current_dir/third-party/icu4c-android-$icu4c_build_version"
 
-  mkdir -p "$current_dir/$package_name-$build_version/libs/$TARGET_ARCH_ABI"
-  cp "$current_dir/obj/local/$TARGET_ARCH_ABI/libxml2.a" "$current_dir/$package_name-$build_version/libs/$TARGET_ARCH_ABI"
+  archs="x86_64 armeabi-v7a x86 arm64-v8a"
+  for arch in $archs ; do
+    TARGET_ARCH_ABI=$arch
+    mkdir -p "$current_dir/$package_name-$build_version/libs/$TARGET_ARCH_ABI"
+    cp "$current_dir/obj/local/$TARGET_ARCH_ABI/libxml2.a" "$current_dir/$package_name-$build_version/libs/$TARGET_ARCH_ABI"
+  done
   rm -rf "$current_dir/obj"
 }
 
@@ -39,12 +44,7 @@ cp -r "$current_dir/../include/libxml" "$current_dir/$package_name-$build_versio
 cp "$current_dir/include/libxml/xmlversion.h" "$current_dir/$package_name-$build_version/include/libxml"
 
 # Start building.
-ANDROID_PLATFORM=android-21
-archs="x86_64 armeabi-v7a x86 arm64-v8a"
-for arch in $archs ; do
-  TARGET_ARCH_ABI=$arch
-  build
-done
+build
 
 rm -rf "$current_dir/third-party"
 cd "$current_dir"
